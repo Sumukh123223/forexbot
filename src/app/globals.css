@@ -1,26 +1,457 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --bg: #0b0f1a;
+  --surface: #111827;
+  --surface-soft: #1f2937;
+  --border: #374151;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --primary: #7c3aed;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-contrast: #eff6ff;
+  --accent-alt: #22c55e;
+  --accent-alt-hover: #16a34a;
+  --accent-alt-contrast: #052e16;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  font-family: var(--font-geist-sans), Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.card-enterprise {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.section-shell {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 2.2vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  max-width: 42rem;
+  margin-top: 0.75rem;
+  color: var(--muted);
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.terminal-shell {
+  --terminal-surface: #141417;
+  --terminal-surface-soft: #1b1b20;
+  --terminal-border: #2a2a31;
+  --terminal-text: #f3f4f6;
+  --terminal-muted: #a1a1aa;
+}
+
+.terminal-shell[data-theme="light"] {
+  --terminal-surface: #f8fafc;
+  --terminal-surface-soft: #eef2f7;
+  --terminal-border: #cbd5e1;
+  --terminal-text: #0f172a;
+  --terminal-muted: #475569;
+}
+
+html[data-accent="emerald-gold"] {
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --accent-contrast: #04110a;
+  --accent-alt: #eab308;
+  --accent-alt-hover: #ca8a04;
+  --accent-alt-contrast: #111827;
+}
+
+html[data-accent="amber-slate"] {
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-contrast: #111827;
+  --accent-alt: #94a3b8;
+  --accent-alt-hover: #cbd5e1;
+  --accent-alt-contrast: #111827;
+}
+
+html[data-accent="purple-rose"] {
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  --accent-contrast: #f8fafc;
+  --accent-alt: #f43f5e;
+  --accent-alt-hover: #e11d48;
+  --accent-alt-contrast: #fff1f2;
+}
+
+html[data-accent="teal-lime"] {
+  --accent: #14b8a6;
+  --accent-hover: #0f766e;
+  --accent-contrast: #ecfeff;
+  --accent-alt: #84cc16;
+  --accent-alt-hover: #65a30d;
+  --accent-alt-contrast: #0f172a;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.accent-hover-text:hover {
+  color: var(--accent);
+}
+
+.accent-border-hover:hover {
+  border-color: var(--accent);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+}
+
+.btn-accent-alt {
+  background: var(--accent-alt);
+  color: var(--accent-alt-contrast);
+}
+
+.btn-accent-alt:hover {
+  background: var(--accent-alt-hover);
+}
+
+/* Global accent bridge: remap legacy utility colors to active palette */
+html[data-accent] .text-sky-400,
+html[data-accent] .text-blue-400,
+html[data-accent] .text-cyan-300,
+html[data-accent] .text-cyan-400,
+html[data-accent] .text-emerald-300,
+html[data-accent] .text-emerald-400,
+html[data-accent] .text-amber-300,
+html[data-accent] .text-fuchsia-300 {
+  color: var(--accent) !important;
+}
+
+html[data-accent] .hover\:text-sky-400:hover,
+html[data-accent] .hover\:text-blue-400:hover,
+html[data-accent] .hover\:text-cyan-300:hover,
+html[data-accent] .hover\:text-cyan-400:hover,
+html[data-accent] .hover\:text-emerald-300:hover,
+html[data-accent] .hover\:text-emerald-400:hover,
+html[data-accent] .hover\:text-amber-300:hover,
+html[data-accent] .hover\:text-fuchsia-300:hover {
+  color: var(--accent-hover) !important;
+}
+
+html[data-accent] .bg-sky-500,
+html[data-accent] .bg-blue-500,
+html[data-accent] .bg-cyan-500,
+html[data-accent] .bg-emerald-500,
+html[data-accent] .bg-amber-500,
+html[data-accent] .bg-fuchsia-500,
+html[data-accent] .bg-teal-500 {
+  background-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+}
+
+html[data-accent] .hover\:bg-sky-600:hover,
+html[data-accent] .hover\:bg-blue-600:hover,
+html[data-accent] .hover\:bg-cyan-400:hover,
+html[data-accent] .hover\:bg-cyan-500:hover,
+html[data-accent] .hover\:bg-emerald-400:hover,
+html[data-accent] .hover\:bg-emerald-500:hover,
+html[data-accent] .hover\:bg-amber-400:hover,
+html[data-accent] .hover\:bg-amber-500:hover,
+html[data-accent] .hover\:bg-fuchsia-400:hover,
+html[data-accent] .hover\:bg-fuchsia-500:hover,
+html[data-accent] .hover\:bg-teal-600:hover {
+  background-color: var(--accent-hover) !important;
+  color: var(--accent-contrast) !important;
+}
+
+html[data-accent] .border-sky-500,
+html[data-accent] .border-blue-500,
+html[data-accent] .border-cyan-500,
+html[data-accent] .border-emerald-500,
+html[data-accent] .border-amber-500,
+html[data-accent] .border-fuchsia-500 {
+  border-color: var(--accent) !important;
+}
+
+html[data-accent] .hover\:border-sky-500:hover,
+html[data-accent] .hover\:border-blue-500:hover,
+html[data-accent] .hover\:border-cyan-500:hover,
+html[data-accent] .hover\:border-emerald-500:hover,
+html[data-accent] .hover\:border-amber-500:hover,
+html[data-accent] .hover\:border-fuchsia-500:hover {
+  border-color: var(--accent-hover) !important;
+}
+
+html[data-accent] .bg-slate-400,
+html[data-accent] .bg-yellow-500,
+html[data-accent] .bg-yellow-400,
+html[data-accent] .bg-cyan-400,
+html[data-accent] .bg-amber-600,
+html[data-accent] .bg-fuchsia-400 {
+  background-color: var(--accent-alt) !important;
+  color: var(--accent-alt-contrast) !important;
+}
+
+html[data-accent] .hover\:bg-slate-300:hover,
+html[data-accent] .hover\:bg-yellow-400:hover,
+html[data-accent] .hover\:bg-cyan-400:hover,
+html[data-accent] .hover\:bg-amber-500:hover,
+html[data-accent] .hover\:bg-fuchsia-400:hover {
+  background-color: var(--accent-alt-hover) !important;
+  color: var(--accent-alt-contrast) !important;
+}
+
+.fx-card {
+  border: 1px solid color-mix(in oklab, var(--border) 85%, white 15%);
+  background: linear-gradient(160deg, color-mix(in oklab, var(--surface) 90%, #0b1120 10%), color-mix(in oklab, var(--surface-soft) 92%, #000 8%));
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.fx-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.fx-card-3d:hover {
+  transform: translateY(-4px) rotateX(1.2deg) rotateY(-1.2deg);
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border) 55%);
+  box-shadow: 0 18px 38px rgba(2, 6, 23, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.fx-grid-bg {
+  background-image:
+    radial-gradient(circle at 20% 12%, color-mix(in oklab, var(--accent) 18%, transparent 82%), transparent 28%),
+    radial-gradient(circle at 84% 22%, color-mix(in oklab, var(--accent-alt) 18%, transparent 82%), transparent 30%),
+    linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+}
+
+.fx-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 45%, var(--border) 55%);
+  background: color-mix(in oklab, var(--accent) 16%, transparent 84%);
+  color: color-mix(in oklab, var(--accent) 70%, white 30%);
+}
+
+.ui-page {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.ui-section {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  padding: 1.5rem;
+}
+
+.ui-title {
+  font-size: clamp(1.5rem, 2.1vw, 2rem);
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ui-subtitle {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.ui-grid-3 {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .ui-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ui-metric-card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface-soft);
+  padding: 1rem;
+}
+
+.ui-metric-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.ui-metric-value {
+  color: var(--text);
+  margin-top: 0.35rem;
+  font-weight: 600;
+  font-size: 1.35rem;
+}
+
+.ui-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.ui-table {
+  width: 100%;
+  font-size: 0.88rem;
+  border-collapse: collapse;
+}
+
+.ui-table thead th {
+  position: sticky;
+  top: 0;
+  background: color-mix(in oklab, var(--surface-soft) 88%, black 12%);
+  color: var(--muted);
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  font-weight: 500;
+}
+
+.ui-table tbody td {
+  padding: 0.75rem 0.85rem;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+
+.ui-table tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--surface-soft) 88%, black 12%);
+}
+
+.ui-table tbody tr:hover {
+  background: color-mix(in oklab, var(--surface-soft) 75%, var(--accent) 25%);
+}
+
+.ui-field {
+  margin-top: 0.25rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text);
+  padding: 0.55rem 0.75rem;
+}
+
+.ui-help {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* Unified premium design system primitives */
+.ui-card {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ui-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.45);
+  box-shadow: 0 18px 38px rgba(2, 6, 23, 0.32), 0 0 0 1px rgba(59, 130, 246, 0.12);
+}
+
+.ui-btn-primary {
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 16px;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ui-btn-primary:hover {
+  background: #2563eb;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+.ui-btn-secondary {
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid #7c3aed;
+  color: #7c3aed;
+  background: rgba(17, 24, 39, 0.25);
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.ui-btn-secondary:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+  transform: translateY(-1px);
+}
+
+.ui-input {
+  width: 100%;
+  border-radius: 8px;
+  height: 44px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.7);
+  color: #fff;
+  padding: 0 12px;
+}
+
+.ui-input-icon {
+  padding-left: 40px;
+}
+
+.ui-input::placeholder {
+  color: #94a3b8;
+}
+
+.ui-input:focus,
+.ui-textarea:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.65);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.ui-textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.7);
+  color: #fff;
+  padding: 10px 12px;
+  min-height: 96px;
 }
