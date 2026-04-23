@@ -1,13 +1,13 @@
-import { Bot, ChartCandlestick, Radar, ShieldCheck } from "lucide-react";
+import { Bot, ChartCandlestick, Radar, ShieldCheck, type LucideIcon } from "lucide-react";
 
-const featureList = [
+const featureList: [string, string, LucideIcon][] = [
   ["Execution Engine", "Low-latency strategy execution with configurable risk caps.", ChartCandlestick],
   ["Risk Controls", "Position sizing, stop logic, and portfolio exposure constraints.", ShieldCheck],
   ["Analytics", "Performance diagnostics, trade logs, and equity visualization.", Radar],
   ["Deployment", "Broker-friendly setup with MT4/MT5 operational templates.", Bot],
 ];
 
-const functionModules = [
+const functionModules: [string, string][] = [
   ["Signal Intake", "Aggregates price, volatility, and session context before any trade decision is considered."],
   ["AI Decision Layer", "Scores setups with probability and confidence filtering to avoid low-quality entries."],
   ["Risk Gate", "Blocks trades that violate drawdown, exposure, or per-trade loss rules."],

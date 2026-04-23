@@ -5,6 +5,7 @@ import { defaultBots } from "@/lib/static-data";
 import { Bot } from "@/models/Bot";
 
 export const metadata = { title: "Forex Bots Pricing | ForexAI Bots" };
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   const db = await connectDb();
