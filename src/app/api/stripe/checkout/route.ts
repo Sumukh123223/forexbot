@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import { connectDb } from "@/lib/db";
 import { Bot } from "@/models/Bot";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -14,6 +14,7 @@ export async function POST(req: Request) {
   const bot = await Bot.findById(botId).lean();
   if (!bot) return NextResponse.json({ error: "Bot not found" }, { status: 404 });
 
+  const stripe = getStripe();
   const checkout = await stripe.checkout.sessions.create({
     mode: "payment",
     success_url: `${process.env.NEXTAUTH_URL}/payment/success`,

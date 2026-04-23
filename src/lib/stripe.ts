@@ -1,9 +1,17 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is missing from env variables.");
-}
+let stripeInstance: Stripe | null = null;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2026-03-25.dahlia",
-});
+export function getStripe() {
+  if (stripeInstance) return stripeInstance;
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("STRIPE_SECRET_KEY is missing from env variables.");
+  }
+
+  stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2026-03-25.dahlia",
+  });
+
+  return stripeInstance;
+}
